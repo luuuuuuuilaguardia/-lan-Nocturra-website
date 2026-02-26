@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Élan Nocturra — Where Scent Becomes Memory</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a0a10;
+    --cream: #fff0f5;
+    --gold: #e8758a;
+    --gold-light: #f5b8c8;
+    --smoke: #2e1220;
+    --rose: #d4305a;
+    --blush: #f9c8d8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    background-image: radial-gradient(ellipse 100% 50% at 50% 0%, rgba(200,40,80,0.06) 0%, transparent 60%);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 3rem;
+    background: linear-gradient(to bottom, rgba(26,10,16,0.97), transparent);
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,240,245,0.6); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 80%, rgba(232,117,138,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 30%, rgba(200,60,100,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(240,140,170,0.08) 0%, transparent 60%);
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: drift 12s ease-in-out infinite alternate;
+  }
+  .orb-1 { width: 400px; height: 400px; background: #c4205a; top: -100px; left: -100px; animation-delay: 0s; }
+  .orb-2 { width: 300px; height: 300px; background: #e87890; bottom: -80px; right: -50px; animation-delay: -4s; }
+  .orb-3 { width: 250px; height: 250px; background: #f5b0c8; bottom: 10%; left: 30%; animation-delay: -8s; }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(30px, 20px) scale(1.05); }
+  }
+
+  /* Grain overlay */
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.4;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #fff0f5 20%, #e8758a 55%, #f5b8c8 80%, #fff0f5 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp 1s 0.15s ease both;
+  }
+
+  .hero-accent {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    display: block;
+    font-size: clamp(4.5rem, 11vw, 9rem);
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,240,245,0.55);
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 2.5rem auto;
+    animation: fadeUp 1s 0.45s ease both;
+  }
+
+  .hero-sub {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,240,245,0.35);
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,240,245,0.3);
+    animation: fadeUp 1.5s 1s ease both;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+  }
+  .section-label {
+    font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300; color: var(--cream);
+  }
+
+  /* ── FRAGRANCE GRID ── */
+  .fragrances {
+    padding: 0 clamp(1.5rem, 5vw, 6rem) 8rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    position: relative;
+    border: 1px solid rgba(232,117,138,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    background: rgba(255,220,235,0.03);
+    backdrop-filter: blur(4px);
+    transition: transform 0.5s ease, border-color 0.4s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(232,117,138,0.45);
+    box-shadow: 0 30px 80px -20px rgba(180,20,60,0.35);
+  }
+
+  .card-visual {
+    height: 380px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Each card gets its own gradient bg */
+  .card-1 .card-visual { background: radial-gradient(ellipse at 50% 100%, rgba(80,160,220,0.2) 0%, rgba(26,10,16,1) 70%); }
+  .card-2 .card-visual { background: radial-gradient(ellipse at 50% 100%, rgba(80,190,100,0.2) 0%, rgba(26,10,16,1) 70%); }
+  .card-3 .card-visual { background: radial-gradient(ellipse at 50% 100%, rgba(190,80,220,0.22) 0%, rgba(26,10,16,1) 70%); }
+  .card-4 .card-visual { background: radial-gradient(ellipse at 50% 100%, rgba(232,60,120,0.25) 0%, rgba(26,10,16,1) 70%); }
+
+  /* CSS Perfume Bottles */
+  .bottle-wrap {
+    position: relative;
+    width: 80px;
+    animation: floatBottle 4s ease-in-out infinite;
+  }
+  @keyframes floatBottle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .bottle {
+    width: 80px;
+    height: 160px;
+    position: relative;
+  }
+
+  /* Bottle body — twisted hourglass shape via clip-path */
+  .bottle-body {
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 130px;
+    clip-path: polygon(15% 0%, 85% 0%, 95% 15%, 80% 45%, 80% 55%, 95% 85%, 100% 100%, 0% 100%, 5% 85%, 20% 55%, 20% 45%, 5% 15%);
+  }
+  .card-1 .bottle-body { background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, #5bc8e8 60%, #0099cc 100%); }
+  .card-2 .bottle-body { background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, #6ed46e 60%, #22aa22 100%); }
+  .card-3 .bottle-body { background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, #cc66dd 50%, #8822aa 100%); }
+  .card-4 .bottle-body { background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, #ff6699 55%, #cc0066 100%); }
+
+  /* Shine on bottle */
+  .bottle-body::after {
+    content: '';
+    position: absolute;
+    top: 5%; left: 20%; width: 15%; height: 60%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+    border-radius: 50%;
+  }
+
+  /* Neck */
+  .bottle-neck {
+    position: absolute;
+    bottom: 128px; left: 50%; transform: translateX(-50%);
+    width: 22px; height: 18px;
+    border-radius: 2px 2px 0 0;
+    background: rgba(255,255,255,0.3);
+  }
+
+  /* Cap */
+  .bottle-cap {
+    position: absolute;
+    bottom: 144px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 20px;
+    border-radius: 3px 3px 2px 2px;
+  }
+  .card-1 .bottle-cap { background: linear-gradient(180deg, #80ddee, #0099cc); }
+  .card-2 .bottle-cap { background: linear-gradient(180deg, #aaee88, #33aa33); }
+  .card-3 .bottle-cap { background: linear-gradient(180deg, #dd88ee, #9922bb); }
+  .card-4 .bottle-cap { background: linear-gradient(180deg, #ffaacc, #dd3388); }
+
+  /* Reflection */
+  .bottle-reflection {
+    position: absolute;
+    bottom: -12px; left: 50%; transform: translateX(-50%) scaleY(-0.3);
+    width: 70px; height: 130px;
+    clip-path: polygon(15% 0%, 85% 0%, 95% 15%, 80% 45%, 80% 55%, 95% 85%, 100% 100%, 0% 100%, 5% 85%, 20% 55%, 20% 45%, 5% 15%);
+    opacity: 0.15;
+    filter: blur(3px);
+  }
+  .card-1 .bottle-reflection { background: linear-gradient(180deg, #5bc8e8, #0099cc); }
+  .card-2 .bottle-reflection { background: linear-gradient(180deg, #6ed46e, #22aa22); }
+  .card-3 .bottle-reflection { background: linear-gradient(180deg, #cc66dd, #8822aa); }
+  .card-4 .bottle-reflection { background: linear-gradient(180deg, #ff6699, #cc0066); }
+
+  /* Glow under bottle */
+  .bottle-glow {
+    position: absolute;
+    bottom: 10px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 20px;
+    border-radius: 50%;
+    filter: blur(12px);
+    transition: opacity 0.4s;
+  }
+  .card-1 .bottle-glow { background: #0099cc; opacity: 0.5; }
+  .card-2 .bottle-glow { background: #22aa22; opacity: 0.5; }
+  .card-3 .bottle-glow { background: #8822aa; opacity: 0.5; }
+  .card-4 .bottle-glow { background: #cc0066; opacity: 0.5; }
+  .card:hover .bottle-glow { opacity: 1; }
+
+  /* Card Info */
+  .card-info {
+    padding: 2rem 2rem 2.5rem;
+    border-top: 1px solid rgba(232,117,138,0.12);
+  }
+
+  .card-number {
+    font-size: 0.55rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem; display: block;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .card-notes {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .note-tag {
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(232,117,138,0.25);
+    border-radius: 20px;
+    color: rgba(255,240,245,0.5);
+    transition: all 0.3s;
+  }
+  .card:hover .note-tag {
+    border-color: rgba(232,117,138,0.55);
+    color: var(--gold-light);
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: rgba(255,240,245,0.5);
+    font-style: italic;
+  }
+
+  /* Card color accent line */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .card:hover::before { opacity: 1; }
+  .card-1::before { background: linear-gradient(to right, transparent, #0099cc, transparent); }
+  .card-2::before { background: linear-gradient(to right, transparent, #22aa22, transparent); }
+  .card-3::before { background: linear-gradient(to right, transparent, #aa44cc, transparent); }
+  .card-4::before { background: linear-gradient(to right, transparent, #e8206a, transparent); }
+
+  /* ── PHILOSOPHY STRIP ── */
+  .philosophy {
+    border-top: 1px solid rgba(232,117,138,0.12);
+    border-bottom: 1px solid rgba(232,117,138,0.12);
+    padding: 5rem clamp(2rem, 8vw, 10rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 4rem auto;
+  }
+  .philosophy-label {
+    font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 1.5rem;
+  }
+  .philosophy-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--cream);
+  }
+  .philosophy-quote em { color: var(--gold); font-style: italic; }
+  .philosophy-text {
+    font-size: 0.85rem; line-height: 1.9;
+    color: rgba(255,240,245,0.5);
+  }
+  .philosophy-text p + p { margin-top: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid rgba(232,117,138,0.12);
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .footer-tagline {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(255,240,245,0.3);
+  }
+  .footer-copy {
+    margin-top: 3rem;
+    font-size: 0.65rem; letter-spacing: 0.1em;
+    color: rgba(255,240,245,0.2);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .philosophy { grid-template-columns: 1fr; gap: 2rem; }
+    .fragrances { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  }
+  @media (max-width: 480px) {
+    .fragrances { grid-template-columns: 1fr; }
+  }
+
+  /* Intersection observer fade */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .reveal:nth-child(3) { transition-delay: 0.2s; }
+  .reveal:nth-child(4) { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Élan Nocturra</span>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <p class="hero-eyebrow">Eau de Parfum &nbsp;·&nbsp; Maison de Parfumerie</p>
+  <h1 class="hero-title">
+    Élan
+    <span class="hero-accent">Nocturra</span>
+  </h1>
+  <p class="hero-tagline">Where Scent Becomes Memory</p>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Four Fragrances &nbsp;·&nbsp; Four Worlds</p>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Discover</span>
+  </div>
+</section>
+
+<!-- SECTION HEADER -->
+<div class="section-header" id="collection">
+  <span class="section-label">The Collection</span>
+  <h2 class="section-title">Fragrances for Every Feeling</h2>
+</div>
+
+<!-- FRAGRANCE CARDS -->
+<section class="fragrances">
+
+  <!-- Card 1: Moonlit Ember Veil -->
+  <article class="card card-1 reveal">
+    <div class="card-visual">
+      <div class="bottle-glow"></div>
+      <div class="bottle-wrap">
+        <div class="bottle">
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body"></div>
+          <div class="bottle-reflection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-info">
+      <span class="card-number">No. 01</span>
+      <h3 class="card-name">Moonlit<br>Ember Veil</h3>
+      <div class="card-notes">
+        <span class="note-tag">Toasted Marshmallow</span>
+        <span class="note-tag">Pink Pepper</span>
+        <span class="note-tag">Jasmine</span>
+        <span class="note-tag">Amber</span>
+        <span class="note-tag">Sandalwood</span>
+      </div>
+      <p class="card-desc">Like sitting by a quiet bonfire under a silver-blue night sky — soft, intimate, and slightly mysterious.</p>
+    </div>
+  </article>
+
+  <!-- Card 2: Citrus Silk Reverie -->
+  <article class="card card-2 reveal">
+    <div class="card-visual">
+      <div class="bottle-glow"></div>
+      <div class="bottle-wrap">
+        <div class="bottle">
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body"></div>
+          <div class="bottle-reflection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-info">
+      <span class="card-number">No. 02</span>
+      <h3 class="card-name">Citrus Silk<br>Reverie</h3>
+      <div class="card-notes">
+        <span class="note-tag">Bergamot</span>
+        <span class="note-tag">Mandarin</span>
+        <span class="note-tag">Vanilla Orchid</span>
+        <span class="note-tag">White Tea</span>
+        <span class="note-tag">Sheer Musk</span>
+      </div>
+      <p class="card-desc">Golden sunlight filtering through linen curtains on a slow morning — fresh yet elegant, airy and refined.</p>
+    </div>
+  </article>
+
+  <!-- Card 3: Velvet Moss Sonata -->
+  <article class="card card-3 reveal">
+    <div class="card-visual">
+      <div class="bottle-glow"></div>
+      <div class="bottle-wrap">
+        <div class="bottle">
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body"></div>
+          <div class="bottle-reflection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-info">
+      <span class="card-number">No. 03</span>
+      <h3 class="card-name">Velvet Moss<br>Sonata</h3>
+      <div class="card-notes">
+        <span class="note-tag">Forest Moss</span>
+        <span class="note-tag">Green Leaves</span>
+        <span class="note-tag">Blackcurrant</span>
+        <span class="note-tag">Cedarwood</span>
+      </div>
+      <p class="card-desc">Walking through a hidden woodland after rainfall — earthy, deep, and poetic, where every step releases a cool green whisper.</p>
+    </div>
+  </article>
+
+  <!-- Card 4: Crimson Petal Rush -->
+  <article class="card card-4 reveal">
+    <div class="card-visual">
+      <div class="bottle-glow"></div>
+      <div class="bottle-wrap">
+        <div class="bottle">
+          <div class="bottle-cap"></div>
+          <div class="bottle-neck"></div>
+          <div class="bottle-body"></div>
+          <div class="bottle-reflection"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-info">
+      <span class="card-number">No. 04</span>
+      <h3 class="card-name">Crimson Petal<br>Rush</h3>
+      <div class="card-notes">
+        <span class="note-tag">Red Peony</span>
+        <span class="note-tag">Dark Cherry</span>
+        <span class="note-tag">Saffron</span>
+        <span class="note-tag">Patchouli</span>
+        <span class="note-tag">Tonka Bean</span>
+      </div>
+      <p class="card-desc">Bold and romantic — the scent of confidence. Like stepping into a grand room wearing your most striking outfit.</p>
+    </div>
+  </article>
+
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div>
+    <span class="philosophy-label">Our Philosophy</span>
+    <h2 class="philosophy-quote">
+      Fragrance is not worn.<br>
+      It is <em>remembered.</em>
+    </h2>
+  </div>
+  <div>
+    <div class="philosophy-text">
+      <p>At Élan Nocturra, we believe a scent is more than an arrangement of notes — it is a doorway to moments that never fully leave us. Each fragrance is composed to evoke a feeling so specific, so deeply human, that wearing it becomes an act of memory-making.</p>
+      <p>Our perfumers work at the intersection of emotion and artistry, selecting each ingredient not merely for its scent but for its ability to transport. This is perfumery as poetry.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <span class="footer-brand">Élan Nocturra</span>
+  <p class="footer-tagline">Where Scent Becomes Memory</p>
+  <p class="footer-copy">© 2025 Élan Nocturra · Eau de Parfum · All rights reserved</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
